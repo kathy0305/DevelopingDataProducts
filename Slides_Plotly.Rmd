@@ -1,0 +1,116 @@
+---
+title: <span style="color:green"> Week 3 Project</span>
+author: <font size="8">Kathy0305</font> 
+date: |
+    <font size="6"> April 12, 2017</font></br></br>
+    Use right/left arrows to navigate slides</br>
+    The slides are formatted for widescreen </br>
+    use browser zoom to increase or decrease size
+output: ioslides_presentation
+    
+    
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+##<span style="color:green"> Instructions </span>
+
+Create a web page presentation using R Markdown that features a plot created with Plotly. Host your webpage on either GitHub Pages, RPubs, or NeoCities. Your webpage must contain the date that you created the document, and it must contain a plot created with Plotly. We would love to see you show off your creativity
+
+##<span style="color:green">Review criteria </span>
+
+
+**The rubric contains the following two questions:**
+
+
+
+> * Does the web page feature a date and is this date less than two months before the date that you're grading this assignment?
+
+> * Is the web page a presentation and does it feature an interactive plot that appears to have been created with Plotly?
+
+
+##<span style="color:green"> Data</span>
+
+
+I obtained data for 3 major springs in Florida that contained the
+attendance/visitors numbers to each spring from 2000-2013.
+
+<style type="text/css">
+body, td {
+   font-size: 20px;
+}
+code.r{
+  font-size: 20px;
+}
+pre {
+  font-size: 20px
+}
+</style>
+<center>
+```{r, echo=FALSE, warning=FALSE, results='asis',message=FALSE}
+
+library(plotly)
+library(tidyverse)
+library(knitr)
+
+
+
+df <- read_csv("SpringsVisitors.csv")
+kable(df, format = "html", align = 'c') 
+
+```
+</center>
+##<span style="color:green">Code used:</span>
+
+
+```{r code used, echo=TRUE, eval=FALSE, message=FALSE, warning=FALSE}
+
+##load required packages
+library(plotly) 
+library(tidyverse)
+
+##read file and store in data frame
+df <- read_csv("SpringsVisitors.csv") 
+
+
+## use gather function to create a df with single factor variable
+df1 <- as.data.frame(df) %>%
+    gather(`Fanning Springs`,`Ichetucknee Springs`,
+           `Manatee Springs`,`Combined`,
+           key="Springs", value="Visitors") 
+plot_ly(df1, x=~Year, y=~ Visitors, color= ~Springs, 
+        type = "scatter", mode = "lines+markers", colors = "Dark2")
+```
+
+
+
+##<span style="color:green">Plot</span>
+
+Interactive plot using Plotly
+
+``` {r plot, echo=FALSE, message=FALSE, warning=FALSE}
+
+##load required packages
+library(plotly) 
+library(tidyverse)
+
+df <- read_csv("SpringsVisitors.csv") ##read file and store in data frame
+
+
+## use gather function to create a df with single factor variable
+df1 <- as.data.frame(df) %>%
+    gather(`Fanning Springs`,`Ichetucknee Springs`,`Manatee Springs`,`Combined`,
+           key="Springs", value="Visitors") 
+plot_ly(df1, x=~Year, y=~ Visitors, color= ~Springs, 
+        type = "scatter", mode = "lines+markers", colors = "Dark2")
+```
+
+***
+
+<center><p style="color:green; font-size:200%">Come visit Florida's Springs</center></p>
+
+<center>![](springs.png)</center>
+
+
